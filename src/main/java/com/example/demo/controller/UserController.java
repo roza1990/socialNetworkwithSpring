@@ -29,6 +29,7 @@ public class UserController {
         List<User> users=userRepository.findAllUsers(springUser.getUser().getId());
         modelMap.addAttribute("users",users);
         modelMap.addAttribute("sendRequests",userRepository.findAllRequestedUsers(springUser.getUser().getId()));
+        modelMap.addAttribute("friends",userRepository.friendsRequest(springUser.getUser().getId()));
         return "user";
     }
 
@@ -38,5 +39,26 @@ public class UserController {
          userRepository.addFriendRequest(userId.getUser().getId(),friendId);
          return "redirect:/user";
     }
+
+    @GetMapping("/accept")
+    public String acceptedRequest(@AuthenticationPrincipal
+                                            SpringUser userId, @RequestParam("friendId") int friendId) {
+        userRepository.acceptedRequest(friendId,userId.getUser().getId());
+        return "redirect:/user";
+    }
+
+    @GetMapping("/reject")
+    public String rejectRequest(@AuthenticationPrincipal
+                                          SpringUser userId, @RequestParam("friendId") int friendId) {
+        userRepository.rejectRequest(friendId,userId.getUser().getId());
+        return "redirect:/user";
+    }
+
+//    @GetMapping("/friends")
+//    public String friendsRequest(@AuthenticationPrincipal
+//                                        SpringUser userId) {
+//        userRepository.friendsRequest(userId.getUser().getId());
+//        return "redirect:/user";
+//    }
 
 }

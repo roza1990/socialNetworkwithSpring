@@ -32,7 +32,7 @@ Welcome <span th:text="${user.name}"></span> | <a href="/logout">Logout</a>
 
 <hr>
 
-
+<p>Request List</p>
 <table border="1">
     <tr>
         <th>Id</th>
@@ -50,6 +50,31 @@ Welcome <span th:text="${user.name}"></span> | <a href="/logout">Logout</a>
         <td th:text="${req.email}"></td>
         <td><a th:href="@{/accept(friendId=${req.id})}">Accept request</a></td>
         <td><a th:href="@{/reject(friendId=${req.id})}">Reject request</a></td>
+
+        <!--<td><img width="50" th:if="${post.picUrl != null}" th:src="@{/post/getImage(picUrl=${post.picUrl})}"></td>-->
+
+    </tr>
+
+</table>
+
+<p>Friends List</p>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>UserName</th>
+        <th>Surname</th>
+        <th>E-mail</th>
+        <th>Action</th>
+
+
+    </tr>
+    <tr th:each="fr : ${friends}">
+        <td th:text="${fr.id}"></td>
+        <td th:text="${fr.name}"></td>
+        <td th:text="${fr.surname}"></td>
+        <td th:text="${fr.email}"></td>
+        <td><a th:href="@{/reject(friendId=${fr.id})}">Remove</a></td>
+
 
         <!--<td><img width="50" th:if="${post.picUrl != null}" th:src="@{/post/getImage(picUrl=${post.picUrl})}"></td>-->
 
