@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Welcome <span th:text="${user.name}"></span> | <a href="/logout">Logout</a>
+<hr>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>UserName</th>
+        <th>Surname</th>
+        <th>E-mail</th>
+        <th>Action</th>
+
+
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.email}"></td>
+        <td><a th:href="@{/send(friendId=${user.id})}">Send request</a></td>
+
+        <!--<td><img width="50" th:if="${post.picUrl != null}" th:src="@{/post/getImage(picUrl=${post.picUrl})}"></td>-->
+
+    </tr>
+
+</table>
+
+<hr>
+
+
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>UserName</th>
+        <th>Surname</th>
+        <th>E-mail</th>
+        <th>Action</th>
+
+
+    </tr>
+    <tr th:each="req : ${sendRequests}">
+        <td th:text="${req.id}"></td>
+        <td th:text="${req.name}"></td>
+        <td th:text="${req.surname}"></td>
+        <td th:text="${req.email}"></td>
+        <td><a th:href="@{/accept(friendId=${req.id})}">Accept request</a></td>
+        <td><a th:href="@{/reject(friendId=${req.id})}">Reject request</a></td>
+
+        <!--<td><img width="50" th:if="${post.picUrl != null}" th:src="@{/post/getImage(picUrl=${post.picUrl})}"></td>-->
+
+    </tr>
+
+</table>
+</body>
+</html>
